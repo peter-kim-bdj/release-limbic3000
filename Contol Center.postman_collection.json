@@ -1,0 +1,133 @@
+{
+	"info": {
+		"_postman_id": "9cf4c198-b003-4f6b-bcfd-6b37abbd0157",
+		"name": "Contol Center",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "play",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-BDJ-USERID",
+						"value": "\"test-user\"",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"wave sound\",\n  \"bufferBeforePlay\": 0,\n  \"playTime\": 0,\n  \"bufferAfterPlay\": 0,\n  \"syncSignal\": {\n    \"repetition\": 0,\n    \"interval\": 0,\n    \"syncType\": \"beep\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/cmd/play",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"cmd",
+						"play"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "record",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-BDJ-USERID",
+						"value": "\"test-user\"",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"string\",\n  \"bufferBeforeRecord\": 0,\n  \"playTime\": 0,\n  \"bufferAfterRecord\": 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/cmd/record",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"cmd",
+						"record"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "isReadyRecordFile",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-BDJ-USERID",
+						"value": "\"test-user\"",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/v1/cmd/isReadyRecordFile/1234",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"cmd",
+						"isReadyRecordFile",
+						"1234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getRecordFilePath",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-BDJ-USERID",
+						"value": "\"test-user\"",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/v1/cmd/getRecordFilePath/1234",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"cmd",
+						"getRecordFilePath",
+						"1234"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
