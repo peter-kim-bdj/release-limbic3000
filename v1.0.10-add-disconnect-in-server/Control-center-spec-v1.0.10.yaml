@@ -1,0 +1,205 @@
+openapi: 3.0.1
+info:
+  title: Control Center API
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8080/'
+    description: local url
+paths: 
+  /v1/connection/adb/connect:
+    get:
+      tags:
+        - Command
+      operationId: connect
+      parameters:
+        - name: X-BDJ-USERID
+          in: header
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: okay
+          content:
+            application/json:
+              schema:
+                 $ref: '#/components/schemas/ConnectResponse'
+        '503':
+          description: Service Unavailable
+  /v1/connection/adb/disconnect:
+    get:
+      tags:
+        - Command
+      operationId: disconnect
+      parameters:
+        - name: X-BDJ-USERID
+          in: header
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                 $ref: '#/components/schemas/DisconnectResponse'
+        '503':
+          description: Service Unavailable
+  /v1/cmd/play:
+    post:
+      tags:
+        - Command
+      operationId: playSound
+      parameters:
+        - name: X-BDJ-USERID
+          in: header
+          schema: 
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Play'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                 $ref: '#/components/schemas/PlayResponse'
+        '503':
+          description: Service Unavailable
+  /v1/cmd/record:
+    post:
+      tags:
+        - Command
+      operationId: recordSound
+      parameters:
+        - name: X-BDJ-USERID
+          in: header
+          schema: 
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Record'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                 $ref: '#/components/schemas/RecordResponse'
+        '503':
+          description: Service Unavailable
+  /v1/cmd/isReadyRecordFile/{uuid}:
+    get:
+      tags:
+        - Command
+      operationId: isReadyRecordFile
+      parameters:
+        - name: X-BDJ-USERID
+          in: header
+          schema: 
+            type: string
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                 $ref: '#/components/schemas/IsReadyRecordFileResponse'
+  /v1/cmd/getRecordFilePath/{uuid}:
+    get:
+      tags:
+        - Command
+      operationId: getFile
+      parameters:
+        - name: X-BDJ-USERID
+          in: header
+          schema: 
+            type: string
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                 $ref: '#/components/schemas/GetFilePathResponse'
+        '400':
+          description: Bad Reqeust
+components:
+  schemas:
+    ConnectResponse:
+      type: object
+      properties:
+        description:
+          type: string
+    DisconnectResponse:
+      type: object
+      properties:
+        description:
+          type: string
+    Play:
+      type: object
+      properties:
+        name:
+          type: string
+        bufferBeforePlay:
+          type: number
+        playTime:
+          type: number
+        bufferAfterPlay:
+          type: number
+        syncSignal: 
+          type: object
+          properties:
+            repetition:
+              type: number
+            interval:
+              type: number
+            syncType:
+              type: string
+    PlayResponse:
+      type: object
+      properties:
+        description:
+          type: string
+    Record:
+      type: object
+      properties:
+        playTime:
+          type: number
+          description: unit is ms
+    IsReadyRecordFileResponse:
+      type: object
+      properties:
+        isReady:
+          type: boolean
+    RecordResponse:
+      type: object
+      properties:
+        uuid:
+          type: string
+        recordedFilename:
+          type: string
+        description:
+          type: string
+    GetFilePathResponse:
+      type: object
+      properties:
+        uuid:
+          type: string
+        path:
+          type: string
+    
